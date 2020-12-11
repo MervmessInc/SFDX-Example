@@ -39,3 +39,4 @@ $RECYCLE.BIN/
 org_list.json
 .history/
 __pycache__/
+force-app/main/default/profiles/
