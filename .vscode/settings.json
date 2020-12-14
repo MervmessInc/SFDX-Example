@@ -5,5 +5,9 @@
     "**/.sfdx": true
   },
   "editor.formatOnSave": true,
-  "files.autoSave": "onFocusChange"
+  "files.autoSave": "onFocusChange",
+  "prettier.useTabs": true,
+  "prettier.tabWidth": 4,
+"editor.detectIndentation": false,
+"editor.insertSpaces": false
 }

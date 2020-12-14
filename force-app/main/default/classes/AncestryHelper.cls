@@ -1,0 +1,32 @@
+/**
+ * @description       :
+ * @author            : merv@merv.org.uk
+ * @group             :
+ * @last modified on  : 14-12-2020
+ * @last modified by  : merv@merv.org.uk
+ * Modifications Log
+ * Ver   Date         Author             Modification
+ * 1.0   14-12-2020   merv@merv.org.uk   Initial Version
+ **/
+public with sharing class AncestryHelper {
+	public static List<Id> getAncestors(Id descendant) {
+		List<Id> ancestors = new List<Id>();
+
+		Ancestry__c person = [
+			SELECT Id, Name, First_Name__c, Family_Name__c, Parent__c
+			FROM Ancestry__c
+			WHERE Id = :descendant
+		];
+
+		while (person.Parent__c != null) {
+			ancestors.add(person.Parent__c);
+			person = [
+				SELECT Parent__c
+				FROM Ancestry__c
+				WHERE Id = :person.Parent__c
+			];
+		}
+
+		return ancestors;
+	}
+}

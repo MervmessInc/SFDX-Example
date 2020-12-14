@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -19,6 +19,11 @@
                 <fieldItem>Record.Parent__c</fieldItem>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Parent_Name__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-056c295d-d783-46da-998b-69a32488f61e</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -35,6 +40,11 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Ancestry__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Partner_Name__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-86f906d9-d144-4f88-8319-994b497e8192</name>
@@ -252,7 +262,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
-                    <value>Ancestries__r</value>
+                    <value>Children__r</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
