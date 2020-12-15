@@ -1,12 +1,12 @@
 /**
  * @description       :
- * @author            : merv@merv.org.uk
+ * @author            : nigel.hughes@sage.com
  * @group             :
- * @last modified on  : 14-12-2020
- * @last modified by  : merv@merv.org.uk
+ * @last modified on  : 15-12-2020
+ * @last modified by  : nigel.hughes@sage.com
  * Modifications Log
  * Ver   Date         Author             Modification
- * 1.0   14-12-2020   merv@merv.org.uk   Initial Version
+ * 1.0   14-12-2020   nigel.hughes@sage.com   Initial Version
  **/
 @isTest
 public with sharing class AncestryHelperTest {
@@ -23,6 +23,8 @@ public with sharing class AncestryHelperTest {
 		List<Id> ancestors = AncestryHelper.getAncestors(bart.Id);
 
 		Test.stopTest();
+
+		System.assert(!ancestors.isEmpty(), 'List wrong size');
 	}
 
 	@TestSetup

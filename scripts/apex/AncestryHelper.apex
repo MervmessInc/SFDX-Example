@@ -15,3 +15,5 @@ List<Ancestry__c> people = [
 ];
 
 system.debug(json.serializePretty(people));
+
+system.debug(ancestors.size());

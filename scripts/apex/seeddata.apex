@@ -9,87 +9,98 @@ system.debug(Ancestries);
 Delete Ancestries;
 
 */
-Ancestry__c Abe = new Ancestry__c(
+
+List<Ancestry__c> theSimpsons = new List<Ancestry__c>();
+
+Ancestry__c abe = new Ancestry__c(
 	Family_Name__c = 'Simpson',
 	First_Name__c = 'Abraham Jebediah "Abe"'
 );
-insert Abe;
+insert abe;
+theSimpsons.Add(abe);
 
-Ancestry__c Mona = new Ancestry__c(
+Ancestry__c mona = new Ancestry__c(
 	Family_Name__c = 'Simpson',
-	First_Name__c = 'Mona Penelope',
-	Ancestry__c = Abe.Id
+	First_Name__c = 'Mona Penelope'
 );
-insert Mona;
+insert mona;
+theSimpsons.Add(mona);
 
-Abe.Ancestry__c = Mona.Id;
-update Abe;
-
-Ancestry__c Clarence = new Ancestry__c(
+Ancestry__c clarence = new Ancestry__c(
 	Family_Name__c = 'Bouvier',
 	First_Name__c = 'Clarence "Clancy"'
 );
-insert Clarence;
+insert clarence;
+theSimpsons.Add(clarence);
 
-Ancestry__c Jacqueline = new Ancestry__c(
+Ancestry__c jacqueline = new Ancestry__c(
 	Family_Name__c = 'Bouvier',
-	First_Name__c = 'Jacqueline Ingrid',
-	Ancestry__c = Clarence.Id
+	First_Name__c = 'Jacqueline Ingrid'
 );
-insert Jacqueline;
+insert jacqueline;
+theSimpsons.Add(jacqueline);
 
-Clarence.Ancestry__c = Jacqueline.Id;
-update Clarence;
-
-Ancestry__c Homer = new Ancestry__c(
+Ancestry__c homer = new Ancestry__c(
 	Family_Name__c = 'Simpson',
-	First_Name__c = 'Homer Jay',
-	Parent__c = Mona.Id
+	First_Name__c = 'Homer Jay'
 );
-insert Homer;
+insert homer;
+theSimpsons.Add(homer);
 
-Ancestry__c Marjorie = new Ancestry__c(
+Ancestry__c marjorie = new Ancestry__c(
 	Family_Name__c = 'Simpson',
-	First_Name__c = 'Marjorie Jacqueline Bouvier',
-	Ancestry__c = Homer.Id,
-	Parent__c = Jacqueline.Id
+	First_Name__c = 'Marjorie Jacqueline Bouvier'
 );
-insert Marjorie;
+insert marjorie;
+theSimpsons.Add(marjorie);
 
-Homer.Ancestry__c = Marjorie.Id;
-update Homer;
-
-Ancestry__c Selma = new Ancestry__c(
+Ancestry__c selma = new Ancestry__c(
 	Family_Name__c = 'Bouvier',
-	First_Name__c = 'Selma',
-	Parent__c = Jacqueline.Id
+	First_Name__c = 'Selma'
 );
-insert Selma;
+insert selma;
+theSimpsons.Add(selma);
 
-Ancestry__c Patty = new Ancestry__c(
+Ancestry__c patty = new Ancestry__c(
 	Family_Name__c = 'Bouvier',
-	First_Name__c = 'Patty',
-	Parent__c = Jacqueline.Id
+	First_Name__c = 'Patty'
 );
-insert Patty;
+insert patty;
+theSimpsons.Add(patty);
 
-Ancestry__c Bartholomew = new Ancestry__c(
+Ancestry__c bartholomew = new Ancestry__c(
 	Family_Name__c = 'Simpson',
-	First_Name__c = 'Bartholomew JoJo',
-	Parent__c = Marjorie.Id
+	First_Name__c = 'Bartholomew JoJo'
 );
-insert Bartholomew;
+insert bartholomew;
+theSimpsons.Add(bartholomew);
 
-Ancestry__c Lisa = new Ancestry__c(
+Ancestry__c lisa = new Ancestry__c(
 	Family_Name__c = 'Simpson',
-	First_Name__c = 'Lisa Marie',
-	Parent__c = Marjorie.Id
+	First_Name__c = 'Lisa Marie'
 );
-insert Lisa;
+insert lisa;
+theSimpsons.Add(lisa);
 
-Ancestry__c Margaret = new Ancestry__c(
+Ancestry__c margaret = new Ancestry__c(
 	Family_Name__c = 'Simpson',
-	First_Name__c = 'Margaret Evelyn',
-	Parent__c = Marjorie.Id
+	First_Name__c = 'Margaret Evelyn'
 );
-insert Margaret;
+insert margaret;
+theSimpsons.Add(margaret);
+
+abe.Ancestry__c = mona.Id;
+mona.Ancestry__c = abe.Id;
+clarence.Ancestry__c = jacqueline.Id;
+jacqueline.Ancestry__c = clarence.Id;
+homer.Ancestry__c = marjorie.Id;
+marjorie.Ancestry__c = homer.Id;
+homer.Parent__c = mona.Id;
+marjorie.Parent__c = jacqueline.Id;
+selma.Parent__c = jacqueline.Id;
+patty.Parent__c = jacqueline.Id;
+bartholomew.Parent__c = marjorie.Id;
+lisa.Parent__c = marjorie.Id;
+margaret.Parent__c = marjorie.Id;
+
+update theSimpsons;

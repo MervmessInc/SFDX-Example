@@ -1,12 +1,12 @@
 /**
  * @description       :
- * @author            : merv@merv.org.uk
+ * @author            : nigel.hughes@sage.com
  * @group             :
  * @last modified on  : 14-12-2020
- * @last modified by  : merv@merv.org.uk
+ * @last modified by  : nigel.hughes@sage.com
  * Modifications Log
  * Ver   Date         Author             Modification
- * 1.0   14-12-2020   merv@merv.org.uk   Initial Version
+ * 1.0   14-12-2020   nigel.hughes@sage.com   Initial Version
  **/
 public with sharing class AncestryHelper {
 	public static List<Id> getAncestors(Id descendant) {
