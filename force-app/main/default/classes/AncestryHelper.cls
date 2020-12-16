@@ -2,8 +2,8 @@
  * @description       :
  * @author            : nigel.hughes@sage.com
  * @group             :
- * @last modified on  : 14-12-2020
- * @last modified by  : nigel.hughes@sage.com
+ * @last modified on  : 16-12-2020
+ * @last modified by  : merv@merv.org.uk
  * Modifications Log
  * Ver   Date         Author             Modification
  * 1.0   14-12-2020   nigel.hughes@sage.com   Initial Version
@@ -11,7 +11,6 @@
 public with sharing class AncestryHelper {
 	public static List<Id> getAncestors(Id descendant) {
 		List<Id> ancestors = new List<Id>();
-
 		Ancestry__c person = [
 			SELECT Id, Name, First_Name__c, Family_Name__c, Parent__c
 			FROM Ancestry__c

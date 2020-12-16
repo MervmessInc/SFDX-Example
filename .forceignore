@@ -12,5 +12,10 @@ package.xml
 # LWC Jest
 **/__tests__/**
 
+#
+# sfdx force:source:tracking:clear
+# sfdx force:source:tracking:reset
+# sfdx force:source:status
+#
+
 force-app/main/default/profiles/
-*Profile*

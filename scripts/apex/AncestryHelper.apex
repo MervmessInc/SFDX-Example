@@ -4,8 +4,6 @@ Ancestry__c bart = [
 	WHERE First_Name__c = 'Bartholomew JoJo'
 ];
 
-system.debug(json.serializePretty(bart));
-
 List<Id> ancestors = AncestryHelper.getAncestors(bart.id);
 
 List<Ancestry__c> people = [
@@ -15,5 +13,4 @@ List<Ancestry__c> people = [
 ];
 
 system.debug(json.serializePretty(people));
-
 system.debug(ancestors.size());
