@@ -39,7 +39,7 @@ BUILD_DATA_CMD = ""
 # List of permission sets to assign to the user.
 PACKAGE_P_SETS = []
 #
-P_SETS = []
+P_SETS = ["Ancestry_User"]
 #
 #
 
