@@ -28,7 +28,7 @@ PRE_DEPLOY = []
 SRC_FOLDERS = ["force-app"]
 
 # Anonymous APEX file to execute ("setupdata.apex")
-BUILD_DATA_CMD = ""
+BUILD_DATA_CMD = "scripts/apex/seeddata.apex"
 
 # List of permission sets to assign to the user.
 P_SETS = ["Ancestry_User"]

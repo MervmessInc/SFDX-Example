@@ -1,14 +1,5 @@
-/*
-
-List<Ancestry__c> ancestries = [
-    SELECT Id From Ancestry__c
-];
-
-system.debug(Ancestries);
-
-Delete Ancestries;
-
-*/
+List<Ancestry__c> ancestries = [SELECT Id FROM Ancestry__c];
+delete Ancestries;
 
 List<Ancestry__c> theSimpsons = new List<Ancestry__c>();
 
