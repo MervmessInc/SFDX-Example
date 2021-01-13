@@ -14,3 +14,28 @@ List<Ancestry__c> people = [
 
 system.debug(json.serializePretty(people));
 system.debug(ancestors.size());
+
+/*
+public with sharing class AncestryHelper {
+	public static List<Id> getAncestors(Id descendant) {
+		List<Id> ancestors = new List<Id>();
+		Ancestry__c person = [
+			SELECT Id, Name, First_Name__c, Family_Name__c, Parent__c
+			FROM Ancestry__c
+			WHERE Id = :descendant
+		];
+
+		Map<Id, Ancestry__c> m = new Map<Id, Ancestry__c>([
+            SELECT Id, Parent__c
+			FROM Ancestry__c
+        ]);
+		while (person.Parent__c != null) {
+			ancestors.add(person.Parent__c);
+            person = m.get(person.Parent__c);
+		}
+
+		return ancestors;
+	}
+}
+*/
+
