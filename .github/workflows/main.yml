@@ -27,15 +27,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
+      - uses: sfdx-actions/setup-pmd@v1 
       - name: run-pmd 
-        uses: sfdx-actions/setup-pmd@v1
-      - run: |
-          pmd -d ./force-app/main/default/classes -R ./pmd-apex-ruleset.xml -f text -r ./pmd.xml -failOnViolation false -no-cache
-          if [ -s "./pmd.xml" ] # if the size of the file is more than 0 then...
-          then
-            cat pmd.xml
-            numberOfViolations=$(grep "" -c pmd.xml) # counting number of lines, as the result file has error per line
-            echo "Apex code analysis found $numberOfViolations violations" 
-            exit 0 # Make it exit 1 when we want this to fail the build
-          fi
+        run: pmd -d ./force-app/main/default/classes -R ./pmd-apex-ruleset.xml -f text
 
