@@ -24,14 +24,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      #- uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
       - name: run-pmd 
         uses: sfdx-actions/setup-pmd@v1
       - run: |
-          pmd -d . -R pmd-apex-ruleset.xml -f text -r pmd.xml -failOnViolation false -no-cache
-          if [ -s "pmd.xml" ] # if the size of the file is more than 0 then...
+          pmd -d ./force-app/main/default/classes -R ./pmd-apex-ruleset.xml -f text -r ./pmd.xml -failOnViolation false -no-cache
+          if [ -s "./pmd.xml" ] # if the size of the file is more than 0 then...
           then
             cat pmd.xml
             numberOfViolations=$(grep "" -c pmd.xml) # counting number of lines, as the result file has error per line
