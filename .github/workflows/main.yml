@@ -35,7 +35,7 @@ jobs:
         uses: sfdx-actions/setup-pmd@v1
       - run: |
           # pmd -d . -r ${{env.PMD_RULESET_FILE}} -format text -reportfile ${{env.PMD_RESULTS_FILE}} -failOnViolation false -no-cache
-          pmd -d . -R ${{env.PMD_RULESET_FILE}} -f text -r ${{env.PMD_RESULTS_FILE}} -failOnViolation false -no-cache
+          pmd -d . -R pmd-apex-ruleset.xml -f text -r pmd.xml -failOnViolation false -no-cache
           #if [ -s "${{env.PMD_RESULTS_FILE}}" ] # if the size of the file is more than 0 then...
           #then
           #  cat ${{env.PMD_RESULTS_FILE}}
