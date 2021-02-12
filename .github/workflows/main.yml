@@ -17,10 +17,6 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    env:
-      NODE_VERSION: "12"
-      PMD_RULESET_FILE: "./pmd-apex-ruleset.xml"
-      PMD_RESULTS_FILE: "./pmd.xml"
     
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -36,11 +32,11 @@ jobs:
       - run: |
           # pmd -d . -r ${{env.PMD_RULESET_FILE}} -format text -reportfile ${{env.PMD_RESULTS_FILE}} -failOnViolation false -no-cache
           pmd -d . -R pmd-apex-ruleset.xml -f text -r pmd.xml -failOnViolation false -no-cache
-          #if [ -s "${{env.PMD_RESULTS_FILE}}" ] # if the size of the file is more than 0 then...
-          #then
-          #  cat ${{env.PMD_RESULTS_FILE}}
-          #  numberOfViolations=$(grep "" -c ${{env.PMD_RESULTS_FILE}}) # counting number of lines, as the result file has error per line
-          #  echo "Apex code analysis found $numberOfViolations violations" 
-          #  exit 0 # Make it exit 1 when we want this to fail the build
-          #fi
+          if [ -s "pmd.xml" ] # if the size of the file is more than 0 then...
+          then
+            cat pmd.xml
+            numberOfViolations=$(grep "" -c pmd.xml) # counting number of lines, as the result file has error per line
+            echo "Apex code analysis found $numberOfViolations violations" 
+            exit 0 # Make it exit 1 when we want this to fail the build
+          fi
 
