@@ -24,10 +24,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      #- uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       # RUN PMD
       - uses: sfdx-actions/setup-pmd@v1 
       - name: run-pmd 
-        run: pmd -d ./force-app/main/default/classes -R ./pmd-apex-ruleset.xml -f text
+        run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text
 
