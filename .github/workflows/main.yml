@@ -34,12 +34,13 @@ jobs:
       - name: run-pmd 
         uses: sfdx-actions/setup-pmd@v1
       - run: |
-          pmd -dir . -format text -rulesets ${{env.PMD_RULESET_FILE}} -reportfile ${{env.PMD_RESULTS_FILE}} -failOnViolation false -no-cache
-          if [ -s "${{env.PMD_RESULTS_FILE}}" ] # if the size of the file is more than 0 then...
-          then
-            cat ${{env.PMD_RESULTS_FILE}}
-            numberOfViolations=$(grep "" -c ${{env.PMD_RESULTS_FILE}}) # counting number of lines, as the result file has error per line
-            echo "Apex code analysis found $numberOfViolations violations" 
-            exit 0 # Make it exit 1 when we want this to fail the build
-          fi
+          # pmd -d . -r ${{env.PMD_RULESET_FILE}} -format text -reportfile ${{env.PMD_RESULTS_FILE}} -failOnViolation false -no-cache
+          pmd -d . -R ${{env.PMD_RULESET_FILE}} -f text -r ${{env.PMD_RESULTS_FILE}} -failOnViolation false -no-cache
+          #if [ -s "${{env.PMD_RESULTS_FILE}}" ] # if the size of the file is more than 0 then...
+          #then
+          #  cat ${{env.PMD_RESULTS_FILE}}
+          #  numberOfViolations=$(grep "" -c ${{env.PMD_RESULTS_FILE}}) # counting number of lines, as the result file has error per line
+          #  echo "Apex code analysis found $numberOfViolations violations" 
+          #  exit 0 # Make it exit 1 when we want this to fail the build
+          #fi
 
