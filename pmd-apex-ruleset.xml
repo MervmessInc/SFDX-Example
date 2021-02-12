@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset
+	name="candidate-portal"
+	xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
+>
+
+    <description>Apex ruleset for the Candidiate Portal</description>
+
+    <exclude-pattern>.*/buildData.*</exclude-pattern>
+    <exclude-pattern>.*/sage-people-utils*/.*</exclude-pattern>
+
+    <rule ref="rulesets/apex/quickstart.xml">
+        <exclude name="ApexDoc" />
+        <exclude name="ApexSharingViolations" />
+        <exclude name="ApexCRUDViolation" />
+        <exclude name="DebugsShouldUseLoggingLevel" />
+        <exclude name="EmptyStatementBlock" />
+
+        <!-- Older version of CyclomaticComplexity, which we do use -->
+        <exclude name="StdCyclomaticComplexity" />
+    </rule>
+
+</ruleset>
