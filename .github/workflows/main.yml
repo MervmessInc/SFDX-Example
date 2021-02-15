@@ -33,7 +33,7 @@ jobs:
       - run: npm ci
         
       # RUN PMD
-      - uses: sfdx-actions/setup-pmd@v1
+      - uses: legetz/setup-pmd@v6.30
       - name: run-pmd 
         run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text
 
