@@ -29,8 +29,9 @@ jobs:
       # NPM / NODE
       - uses: actions/setup-node@v2
         with:
-          node-version: '12'
-
+          node-version: '12' 
+      - run: npm ci
+        
       # RUN PMD
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd 
