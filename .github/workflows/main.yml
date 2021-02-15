@@ -29,5 +29,5 @@ jobs:
       # RUN PMD
       - uses: sfdx-actions/setup-pmd@v1 
       - name: run-pmd 
-        run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text
+        run: sudo pmd -language apex -d . -R pmd-apex-ruleset.xml -f text
 
