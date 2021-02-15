@@ -32,10 +32,9 @@ jobs:
       #    node-version: '12' 
       #- run: npm ci
         
-      # RUN PMD
+      # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
       - uses: sfdx-actions/setup-pmd@v1
-      - name: run-pmd 
-      #  run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
+      - name: run-pmd
       - run: |
           pmd -language apex -d . -f text -R pmd-apex-ruleset.xml -r pmd.xml --failOnViolation false -no-cache
           if [ -s "pmd.xml" ] # if the size of the file is more than 0 then...
