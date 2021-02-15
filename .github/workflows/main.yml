@@ -25,6 +25,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      # NPM / NODE
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
 
       # RUN PMD
       - uses: sfdx-actions/setup-pmd@v1
