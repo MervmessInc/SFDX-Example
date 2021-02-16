@@ -10,7 +10,6 @@
 
     <rule ref="category/apex/bestpractices.xml">
     	<exclude name="DebugsShouldUseLoggingLevel" />
-        <exclude name="ApexAssertionsShouldIncludeMessage" />
   	</rule>
   	<rule ref="category/apex/codestyle.xml" />
   	<rule ref="category/apex/design.xml" />
