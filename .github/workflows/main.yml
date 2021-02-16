@@ -8,7 +8,7 @@ on:
     push:
         branches: [master]
     pull_request:
-        branches: [synchronize, ready_for_review]
+        types: [synchronize, ready_for_review]
 
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch:
@@ -28,11 +28,12 @@ jobs:
             # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
             - name: Run PMD
               uses: sfdx-actions/setup-pmd@v1
+            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text -min 1 -no-cache
             - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 3 -no-cache
 
             # Install Node
             - name: Install Node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v1
               with:
                   node-version: "12"
             - run: |
