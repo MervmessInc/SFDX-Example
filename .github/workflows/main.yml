@@ -28,7 +28,7 @@ jobs:
             # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
             - name: run-pmd
               uses: sfdx-actions/setup-pmd@v1
-            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 3
+            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 3 -no-cache
 
             # Install Salesforce CLI
             - name: Install Salesforce CLI
@@ -37,3 +37,9 @@ jobs:
                   mkdir sfdx-cli
                   tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
                   sudo ./sfdx-cli/install
+
+            # Authorise devhub
+            - name: Autenticate DevHub
+              run: |
+                  echo "${secrets.SERVER_KEY}" > server.key
+                  sfdx force:auth:jwt:grant -i ${secrets.CONSUMER_KEY} -f server.key -u ${secrets.USERNAME} -d -a hub-org
