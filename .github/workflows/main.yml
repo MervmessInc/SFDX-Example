@@ -25,18 +25,19 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v2
 
+            # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
+            - name: Run PMD
+              uses: sfdx-actions/setup-pmd@v1
+            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 3 -no-cache
+
             # Install Node
-            - uses: actions/setup-node@v2
+            - name: Install Node
+              uses: actions/setup-node@v2
               with:
                   node-version: "12"
             - run: |
                   echo "${GITHUB_WORKSPACE}/node_modules/.bin" >> $GITHUB_PATH
                   npm ci
-
-            # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
-            - name: run-pmd
-              uses: sfdx-actions/setup-pmd@v1
-            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 3 -no-cache
 
             # Install Salesforce CLI
             - name: Install Salesforce CLI
