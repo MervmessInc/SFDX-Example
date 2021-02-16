@@ -2,54 +2,38 @@
 
 name: SFDX-Example-CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [synchronize, ready_for_review ]
+    # Triggers the workflow on push or pull request events but only for the master branch
+    push:
+        branches: [master]
+    pull_request:
+        branches: [synchronize, ready_for_review]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    
-    # The type of runner that the job will run on
-    runs-on: ubuntu-18.04
+    # This workflow contains a single job called "build"
+    build:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-18.04
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      
-      # NPM / NODE
-      #- uses: actions/setup-node@v2
-      #  with:
-      #    node-version: '12' 
-      #- run: npm ci
-        
-      # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
-      - name: run-pmd
-        uses: sfdx-actions/setup-pmd@v1
-      - run: |
-          pmd -language apex -d . -f text -R pmd-apex-ruleset.xml -r pmd.xml --failOnViolation false -no-cache
-          if [ -s "pmd.xml" ] # if the size of the file is more than 0 then...
-          then
-            cat pmd.xml
-            numberOfViolations=$(grep "" -c pmd.xml) # counting number of lines, as the result file has error per line
-            echo "Apex code analysis found $numberOfViolations violations" 
-            exit 0 # Make it exit 1 when we want this to fail the build
-          fi
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - uses: actions/checkout@v2
 
-      # Install Salesforce CLI
-      - name: Install Salesforce CLI
-        run: |
-          wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-          mkdir sfdx-cli
-          tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
-          sudo ./sfdx-cli/install
-          
+            # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
+            - name: run-pmd
+              uses: sfdx-actions/setup-pmd@v1
+            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
+
+            # Install Salesforce CLI
+            - name: Install Salesforce CLI
+              run: |
+                  wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+                  mkdir sfdx-cli
+                  tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+                  sudo ./sfdx-cli/install
