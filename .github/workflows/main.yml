@@ -28,7 +28,7 @@ jobs:
             # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
             - name: run-pmd
               uses: sfdx-actions/setup-pmd@v1
-            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 2 -showsuppressed
+            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 5
 
             # Install Salesforce CLI
             - name: Install Salesforce CLI
