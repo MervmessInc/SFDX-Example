@@ -41,5 +41,5 @@ jobs:
             # Authorise devhub
             - name: Autenticate DevHub
               run: |
-                  echo "${secrets.SERVER_KEY}" > server.key
-                  sfdx force:auth:jwt:grant -i ${secrets.CONSUMER_KEY} -f server.key -u ${secrets.USERNAME} -d -a hub-org
+                  echo "${{ secrets.SERVER_KEY }}" > "server.key"
+                  sfdx force:auth:jwt:grant -i ${{ secrets.CONSUMER_KEY} } -f server.key -u ${{ secrets.USERNAME}} -d -a hub-org
