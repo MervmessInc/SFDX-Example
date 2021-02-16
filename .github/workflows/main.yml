@@ -25,6 +25,12 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v2
 
+            # Install Node
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: "12"
+            - run: npm ci
+
             # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
             - name: run-pmd
               uses: sfdx-actions/setup-pmd@v1
@@ -33,10 +39,9 @@ jobs:
             # Install Salesforce CLI
             - name: Install Salesforce CLI
               run: |
-                  wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-                  mkdir sfdx-cli
-                  tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
-                  sudo ./sfdx-cli/install
+                  npm install sfdx-cli
+                  echo "${GITHUB_WORKSPACE}/node_modules/.bin" >> $GITHUB_PATH
+                  sfdx --version
 
             # Authorise devhub
             - name: Autenticate DevHub
