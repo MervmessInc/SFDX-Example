@@ -1,0 +1,49 @@
+/**
+ * @description       : 
+ * @author            : nigel.hughes@sage.com
+ * @group             : Sage People
+ * @last modified on  : 24-02-2021
+ * @last modified by  : nigel.hughes@sage.com
+ * Modifications Log 
+ * Ver   Date         Author                  Modification
+ * 1.0   24-02-2021   nigel.hughes@sage.com   Initial Version
+**/
+
+SELECT 	Id, First_Name__c, Family_Name__c, Ancestry__c, Parent__c,
+		Parent__r.First_Name__c, Parent__r.Ancestry__c,
+		Parent__r.Parent__c
+FROM 	Ancestry__c
+
+SELECT 	Id, First_Name__c, Family_Name__c, Ancestry__c, Parent__c,
+		Parent__r.Ancestry__c,Parent__r.Parent__c
+FROM 	Ancestry__c
+
+/* Bartholomew */
+SELECT 	Id, First_Name__c, Family_Name__c, Ancestry__c, Parent__c,
+		Parent__r.Ancestry__c,Parent__r.Parent__c
+FROM 	Ancestry__c
+WHERE	Id= 'a008E00000E13NNQAZ'
+
+/* Jacqueline Ingrid */
+SELECT 	Id, First_Name__c, Family_Name__c, Ancestry__c, Parent__c,
+		Parent__r.Ancestry__c,Parent__r.Parent__c
+FROM 	Ancestry__c
+WHERE	Id= 'a008E00000E13NIQAZ'
+
+/* Homer Jay */
+SELECT 	Id, First_Name__c, Family_Name__c, Ancestry__c, Parent__c,
+		Parent__r.Ancestry__c,Parent__r.Parent__c
+FROM 	Ancestry__c
+WHERE	Id= 'a008E00000E13NJQAZ'
+
+/* Clarence "Clancy" */
+SELECT 	Id, First_Name__c, Family_Name__c, Ancestry__c, Parent__c,
+		Parent__r.Ancestry__c,Parent__r.Parent__c
+FROM 	Ancestry__c
+WHERE	Id= 'a008E00000E13NHQAZ'
+
+/* Abraham Jebediah "Abe" */
+SELECT 	Id, First_Name__c, Family_Name__c, Ancestry__c, Parent__c,
+		Parent__r.Ancestry__c,Parent__r.Parent__c
+FROM 	Ancestry__c
+WHERE	Id= 'a008E00000E13NFQAZ'

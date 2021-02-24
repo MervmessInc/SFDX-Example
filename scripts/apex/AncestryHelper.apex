@@ -36,6 +36,17 @@ public with sharing class AncestryHelper {
 
 		return ancestors;
 	}
+
+	@AuraEnabled(cacheable=true)
+	public static List<Ancestry__c> getDescendents(Id parentId){
+		List<Ancestry__c> children = [
+			SELECT Id,Name,First_Name__c,Family_Name__c 
+			FROM Ancestry__c 
+			WHERE Parent__r.Ancestry__c=:parentId OR Parent__c=:parentId
+		];
+		return children;
+	}
+
 }
 */
 

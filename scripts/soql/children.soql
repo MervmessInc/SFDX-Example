@@ -1,0 +1,26 @@
+/**
+ * @description       : 
+ * @author            : nigel.hughes@sage.com
+ * @group             : Sage People
+ * @last modified on  : 24-02-2021
+ * @last modified by  : nigel.hughes@sage.com
+ * Modifications Log 
+ * Ver   Date         Author                  Modification
+ * 1.0   09-02-2021   nigel.hughes@sage.com   Initial Version
+**/
+
+/*
+SELECT Id,Name,First_Name__c,Family_Name__c 
+FROM Ancestry__c 
+WHERE Parent__r.Ancestry__c=:recordId OR Parent__c=:recordId
+*/
+
+/* Marjorie Jacqueline Bouvier */
+SELECT Id,Name,First_Name__c,Family_Name__c 
+FROM Ancestry__c 
+WHERE Parent__r.Ancestry__c='a008E00000E13NKQAZ' OR Parent__c='a008E00000E13NKQAZ'
+
+/* Homer Jay Simpson */
+SELECT Id,Name,First_Name__c,Family_Name__c 
+FROM Ancestry__c 
+WHERE Parent__r.Ancestry__c='a008E00000E13NJQAZ' OR Parent__c='a008E00000E13NJQAZ'
