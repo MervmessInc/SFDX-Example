@@ -9,5 +9,8 @@
   "prettier.useTabs": true,
   "prettier.tabWidth": 4,
 "editor.detectIndentation": false,
-"editor.insertSpaces": false
+"editor.insertSpaces": false,
+"apexPMD.runOnFileOpen": true,
+"apexPMD.priorityErrorThreshold": 2,
+"apexPMD.priorityWarnThreshold": 4
 }
