@@ -173,9 +173,9 @@ def install_source(org_alias, src_folder):
     py_obj = sfdx.install_source(org_alias, src_folder)
 
     if py_obj['status'] == 1:
+        logging.warning(f"{py_obj}")
         message = py_obj['message']
         logging.error(f"MESSAGE: {message}")
-        logging.warning(f"{py_obj}")
         sys.exit(1)
 
     if py_obj['status'] == 0:
