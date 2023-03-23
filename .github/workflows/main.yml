@@ -18,12 +18,12 @@ jobs:
     # This workflow contains a single job called "build"
     build:
         # The type of runner that the job will run on
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
 
             # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
             - name: Run PMD
@@ -55,11 +55,13 @@ jobs:
 
             # Build Scratch Org
             - name: Run org_builder
-              uses: actions/setup-python@v2
+              uses: actions/setup-python@v3
               with:
-                  python-version: "3.8"
+                  python-version: "3.10"
+                  cache: 'pip'
+            - run: pip install -r requirements.txt
             - run: python org_builder.py -a sfdx-example -d 1 -v hub-org --debug
 
             # Run tests
             - name: Run Tests
-              run: sfdx force:apex:test:run -r human -w 5 -l RunLocalTests --codecoverage
+              run: sfdx apex:run:test -r human -w 5 -l RunLocalTests -c -v

@@ -1,0 +1,11 @@
+https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_key_and_cert.htm
+
+$ which openssl
+
+$ openssl genpkey -des3 -algorithm RSA -pass pass:SomePassword -out server.pass.key -pkeyopt rsa_keygen_bits:2048
+
+$ openssl rsa -passin pass:SomePassword -in server.pass.key -out server.key
+
+$ openssl req -new -key server.key -out server.csr
+
+$ openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
