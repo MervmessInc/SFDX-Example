@@ -37,7 +37,13 @@ Thumbs.db
 ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
+
+# Project specific files
 org_list.json
 .history/
 __pycache__/
 force-app/main/default/profiles/
+JWT/server.crt
+JWT/server.csr
+JWT/server.key
+JWT/server.pass.key
