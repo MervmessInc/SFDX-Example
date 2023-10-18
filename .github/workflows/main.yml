@@ -17,6 +17,13 @@ on:
 jobs:
     # This workflow contains a single job called "build"
     build:
+        env:
+            NODE_VERSION: 18
+            PMD_RULESET_FILE: "./pmd-apex-ruleset.xml"
+            PMD_RESULT_FILE: "./pmd-result.xml"
+            ORG_ALIAS: "sfdx-example"
+            ADMIN_EMAIL: "merv@merv.org.uk"
+
         # The type of runner that the job will run on
         runs-on: ubuntu-latest
 
@@ -28,14 +35,14 @@ jobs:
             # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
             - name: Run PMD
               uses: sfdx-actions/setup-pmd@v1
-            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text -min 1 -no-cache
-            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 3 -no-cache
+            - run: pmd -language apex -d . -R ${{ env.PMD_RULESET_FILE }} -f text -min 1 -no-cache
+            - run: pmd -language apex -d . -R ${{ env.PMD_RULESET_FILE }} -f text --failOnViolation false -min 3 -no-cache
 
             # Install Node
             - name: Install Node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                  node-version: "14"
+                  node-version: ${{ env.NODE_VERSION }}
             - run: |
                   echo "${GITHUB_WORKSPACE}/node_modules/.bin" >> $GITHUB_PATH
                   npm ci
@@ -43,9 +50,10 @@ jobs:
             # Install Salesforce CLI
             - name: Install Salesforce CLI
               run: |
-                  npm install sfdx-cli
+                  npm install -g @salesforce/cli
                   echo "${GITHUB_WORKSPACE}/node_modules/.bin" >> $GITHUB_PATH
                   sfdx --version
+                  sfdx plugins --core
 
             # Authorise devhub
             - name: Autenticate DevHub
@@ -58,9 +66,9 @@ jobs:
               uses: actions/setup-python@v3
               with:
                   python-version: "3.10"
-                  cache: 'pip'
+                  cache: "pip"
             - run: pip install -r requirements.txt
-            - run: python org_builder.py -a sfdx-example -d 1 -v hub-org --debug
+            - run: python org_builder.py -a ${{ env.ORG_ALIAS }} -d 1 -e ${{ env.ADMIN_EMAIL }}-v hub-org --debug
 
             # Run tests
             - name: Run Tests
