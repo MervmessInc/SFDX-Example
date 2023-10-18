@@ -55,6 +55,10 @@ jobs:
                   sfdx --version
                   sfdx plugins --core
 
+            # sf code scanner
+            - name: run sf scanner
+              run: sf scanner:run --target force-app
+
             # Authorise devhub
             - name: Autenticate DevHub
               run: |
