@@ -55,9 +55,13 @@ jobs:
                   sfdx --version
                   sfdx plugins --core
 
+            # Install SFDX Scanner
+            - name: Install SFDX Scanner
+              run: sf plugins install @salesforce/sfdx-scanner
+
             # sf code scanner
             - name: run sf scanner
-              run: sf scanner:run --target force-app
+              run: sf scanner:run --target force-app -f table
 
             # Authorise devhub
             - name: Autenticate DevHub
