@@ -2,10 +2,16 @@
 SCRATCH_DEF: config/project-scratch-def.json
 
 # Default duration in days
-DURATION: 5
+DURATION: 10
 
 # Default Devhub
 DEVHUB: hub-org
+
+# use_namepspace
+USE_NAMESPACE: False
+
+# Preview Release
+PREVIEW: False
 
 # List of managed package Ids to install into the Org.
 PACKAGE_IDS: []

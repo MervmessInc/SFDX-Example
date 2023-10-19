@@ -17,6 +17,13 @@ on:
 jobs:
     # This workflow contains a single job called "build"
     build:
+        env:
+            NODE_VERSION: 18
+            PMD_RULESET_FILE: "./pmd-apex-ruleset.xml"
+            PMD_RESULT_FILE: "./pmd-result.xml"
+            ORG_ALIAS: "sfdx-example"
+            ADMIN_EMAIL: "merv@merv.org.uk"
+
         # The type of runner that the job will run on
         runs-on: ubuntu-latest
 
@@ -25,17 +32,11 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v3
 
-            # RUN PMD ~ pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false
-            - name: Run PMD
-              uses: sfdx-actions/setup-pmd@v1
-            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text -min 1 -no-cache
-            - run: pmd -language apex -d . -R pmd-apex-ruleset.xml -f text --failOnViolation false -min 3 -no-cache
-
             # Install Node
             - name: Install Node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                  node-version: "14"
+                  node-version: ${{ env.NODE_VERSION }}
             - run: |
                   echo "${GITHUB_WORKSPACE}/node_modules/.bin" >> $GITHUB_PATH
                   npm ci
@@ -43,25 +44,33 @@ jobs:
             # Install Salesforce CLI
             - name: Install Salesforce CLI
               run: |
-                  npm install sfdx-cli
+                  npm install -g @salesforce/cli
                   echo "${GITHUB_WORKSPACE}/node_modules/.bin" >> $GITHUB_PATH
-                  sfdx --version
+                  sf --version
+
+            # Install SFDX Scanner
+            - name: Install SFDX Scanner
+              run: sf plugins install @salesforce/sfdx-scanner
+
+            # sf code scanner
+            - name: run sf scanner
+              run: sf scanner:run --target force-app -f table -s 2 --normalize-severity
 
             # Authorise devhub
             - name: Autenticate DevHub
               run: |
                   echo "${{ secrets.SERVER_KEY }}" > "server.key"
-                  sfdx force:auth:jwt:grant -i ${{ secrets.CONSUMER_KEY }} -f server.key -u ${{ secrets.USERNAME }} -d -a hub-org
+                  sf org login jwt -i ${{ secrets.CONSUMER_KEY }} -f server.key -o ${{ secrets.USERNAME }} -d -a hub-org
 
             # Build Scratch Org
             - name: Run org_builder
               uses: actions/setup-python@v3
               with:
                   python-version: "3.10"
-                  cache: 'pip'
+                  cache: "pip"
             - run: pip install -r requirements.txt
-            - run: python org_builder.py -a sfdx-example -d 1 -v hub-org --debug
+            - run: python org_builder.py -a ${{ env.ORG_ALIAS }} -d 1 -e ${{ env.ADMIN_EMAIL }} -v hub-org --debug
 
             # Run tests
             - name: Run Tests
-              run: sfdx apex:run:test -r human -w 5 -l RunLocalTests -c -v
+              run: sf apex run test -r human -w 5 -l RunLocalTests -c -v

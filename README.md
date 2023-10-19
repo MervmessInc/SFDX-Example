@@ -1,16 +1,37 @@
-# Salesforce DX Project: Next Steps
+# Exmaple Salesforce DX Project using GitHub Actions.
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Example Salesfoce CI using GitHub actions.
 
-## How Do You Plan to Deploy Your Changes?
+* Static code scan
+* Build scratch org 
+* Run unit tests
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+## Intentionally failing workflow
 
-## Configure Your Salesforce DX Project
+The lighting app in this repo has been specififcally written to highlight the workflow's behaviour. Not implementing Salesforce best practices ultimatly leads to a failed unit test.
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+```
+=== Apex Code Coverage for Test Run 7073G00000sJ2H1
+TEST NAME                            CLASS BEING TESTED  OUTCOME  PERCENT  MESSAGE                                                       RUNTIME (MS)
+───────────────────────────────────  ──────────────────  ───────  ───────  ────────────────────────────────────────────────────────────  ────────────
+AncestryHelperTest.testGetAncestors  AncestryHelper      Fail     89%      System.LimitException: Too many SOQL queries: 101             
+                                                                           Class.AncestryHelper.getAncestors: line 22, column 1          
+                                                                           Class.AncestryHelperTest.testGetAncestors: line 23, column 1  594 
+```
 
-## Read All About It
+Looking at the action log we can see that the potential for this failure is highlighted by the static code scanner.
+```
+ LOCATION                                              DESCRIPTION                                           CATEGORY      U R L                                                                                      
+ ───────────────────────────────────────────────────── ───────────────────────────────────────────────────── ───────────── ────────────────────────────────────────────────────────────────────────────────────────── 
+ force-app/main/default/classes/AncestryHelper.cls:12    Missing ApexDoc comment                             Documentation https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_documentation.html#apexdoc                 
+ force-app/main/default/classes/AncestryHelper.cls:14    Validate CRUD permission before SOQL/DML operation  Security      https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_security.html#apexcrudviolation            
+                                                         or enforce user mode                                                                                                                                         
+ force-app/main/default/classes/AncestryHelper.cls:22    Avoid Soql queries inside loops                     Performance   https://pmd.github.io/pmd-6.55.0/pmd_rules_apex_performance.html#avoidsoqlinloops
+```
+
+The _"Avoid Soql queries inside loops"_ message references the same line as the failed unit test. (force-app/main/default/classes/AncestryHelper.cls:22) 
+
+## Salesforce CLI documentation
 
 - [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
 - [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
