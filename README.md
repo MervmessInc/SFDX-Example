@@ -1,4 +1,4 @@
-# Exmaple Salesforce DX Project using GitHub Actions.
+# Example Salesforce DX Project using GitHub Actions.
 
 Example Salesfoce CI using GitHub actions.
 
