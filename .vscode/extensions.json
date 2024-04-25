@@ -20,11 +20,11 @@
 		"njqdev.vscode-python-typehint",
 		"mechatroner.rainbow-csv",
 		"salesforce.salesforcedx-vscode-core",
-		"hugoom.sfdx-autoheader",
 		"salesforce.salesforce-vscode-slds",
 		"salesforce.salesforcedx-vscode-soql",
 		"salesforce.salesforcedx-vscode-visualforce",
 		"ms-python.black-formatter",
-		"ms-python.flake8"
+        "ms-python.flake8",
+        "peterweinberg.apexdox-vs-code"
 	]
 }
