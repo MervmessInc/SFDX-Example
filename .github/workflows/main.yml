@@ -59,8 +59,8 @@ jobs:
             # Authorise devhub
             - name: Autenticate DevHub
               run: |
-                  echo "${{ secrets.SERVER_KEY }}" > "server.key"
-                  sf org login jwt -i ${{ secrets.CONSUMER_KEY }} -f server.key -o ${{ secrets.USERNAME }} -d -a hub-org
+                  echo "${{ secrets.AUTHFILE }}" > "authFile.json"
+                  sf org login sfdx-url --sfdx-url-file authFile.json -d -a hub-org
 
             # Build Scratch Org
             - name: Run org_builder
