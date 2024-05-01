@@ -54,7 +54,7 @@ jobs:
 
             # sf code scanner
             - name: run sf scanner
-              run: sf scanner:run --target force-app -f table -s 2 --normalize-severity
+              run: sf scanner:run --target force-app -f table -s 3 --normalize-severity
 
             # Authorise devhub
             - name: Autenticate DevHub
