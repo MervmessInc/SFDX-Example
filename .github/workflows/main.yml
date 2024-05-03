@@ -54,13 +54,13 @@ jobs:
 
             # sf code scanner
             - name: run sf scanner
-              run: sf scanner:run --target force-app -f table -s 2 --normalize-severity
+              run: sf scanner:run --target force-app -f table -s 3 --normalize-severity
 
             # Authorise devhub
             - name: Autenticate DevHub
               run: |
-                  echo "${{ secrets.SERVER_KEY }}" > "server.key"
-                  sf org login jwt -i ${{ secrets.CONSUMER_KEY }} -f server.key -o ${{ secrets.USERNAME }} -d -a hub-org
+                  echo ${{ secrets.DEVHUB_SFDX_URL }} > ./SFDX_URL_STORE.txt
+                  sf org login sfdx-url -f ./SFDX_URL_STORE.txt -a hub-org -d
 
             # Build Scratch Org
             - name: Run org_builder

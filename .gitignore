@@ -47,3 +47,4 @@ JWT/server.crt
 JWT/server.csr
 JWT/server.key
 JWT/server.pass.key
+authFile.json
